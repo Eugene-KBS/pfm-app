@@ -26,7 +26,8 @@ async def main():
                 await pg.click("text=先看示範資料")
                 await pg.wait_for_selector(".hero-num")
                 await pg.wait_for_timeout(900)
-                for tab in ("總覽", "匯報", "明細", "趨勢"):
+                tabs = [await b_.inner_text() for b_ in await pg.query_selector_all(".tabbar button")]
+                for tab in tabs:
                     await pg.click(f'.tabbar button:has-text("{tab}")')
                     await pg.wait_for_timeout(300)
                     await pg.screenshot(path=os.path.join(OUT, f"{scheme}-{tab}.png"), full_page=True)

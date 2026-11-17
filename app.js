@@ -2,7 +2,7 @@
    Data arrives encrypted from a private repository and is decrypted on this device only. */
 (() => {
   'use strict';
-  const VERSION = '1.0.0';
+  const VERSION = '1.1.0';
   const LS = { token: 'pfm.token', setup: 'pfm.setup', env: 'pfm.env', fetched: 'pfm.fetched', hide: 'pfm.hide', demo: 'pfm.demo' };
   const store = {
     get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
@@ -35,6 +35,10 @@
   const fmt = (n) => (n == null ? '—' : Math.round(n).toLocaleString('en-US'));
   const amt = (n, cls) => el('span', { class: 'amt num' + (cls ? ' ' + cls : '') }, fmt(n));
   const wan = (n) => { const w = n / 10000; return (w >= 10 || Number.isInteger(w) ? Math.round(w) : Math.round(w * 10) / 10) + ' 萬'; };
+  const fmt2 = (n) => (n == null ? '—' : Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+  const sign = (n) => (n < 0 ? '−' : '+');
+  const pct = (v) => (v == null ? '—' : sign(v) + Math.abs(v).toFixed(1) + '%');
+  const qty = (n) => (Number.isInteger(n) ? fmt(n) : String(Math.round(n * 1e5) / 1e5));
   const md = (iso) => `${+iso.slice(5, 7)}/${+iso.slice(8, 10)}`;
   const ymLabel = (ym) => `${ym.slice(0, 4)} 年 ${+ym.slice(5)} 月`;
   const WEEK = ['日', '一', '二', '三', '四', '五', '六'];
@@ -197,9 +201,9 @@
     return 10 * p;
   }
   /* Monthly bars. series: [{key, cls}] stacked bottom-up; one y-axis; tap selects a month. */
-  function barChart(trend, series, selIdx, onSel, label) {
+  function barChart(trend, series, selIdx, onSel, label, opts) {
     const W = 340, H = 178, L = 34, R = 4, T = 10, B = 40, n = trend.length;
-    const top = niceMax(Math.max(...trend.map((t) => series.reduce((s, q) => s + Math.max(0, t[q.key]), 0))));
+    const top = niceMax(Math.max(...trend.map((t) => series.reduce((s, q) => s + Math.max(0, t[q.key]), 0))) * (opts && opts.labels ? 1.08 : 1));
     const band = (W - L - R) / n, bw = Math.min(16, band * 0.6);
     const y = (v) => T + (1 - v / top) * (H - T - B);
     const g = sv('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': label });
@@ -219,6 +223,7 @@
         grp.append(sv('path', { class: q.cls, d }));
         base += t[q.key];
       });
+      if (opts && opts.labels && base > 0) grp.append(sv('text', { class: 'amt', x: cx, y: y(base) - 5, 'text-anchor': 'middle' }, wan(base)));
       const mon = +t.ym.slice(5);
       if (on) grp.append(sv('rect', { class: 'selmark', x: cx - bw / 2 - 2, y: H - B + 1, width: bw + 4, height: 2.5 }));
       grp.append(sv('text', { class: on ? 'sel' : null, x: cx, y: H - B + 15, 'text-anchor': 'middle' }, mon));
@@ -380,6 +385,45 @@
     ];
   }
 
+
+  function viewStocks(d) {
+    const k = d.stocks, t = k.total, tw = k.tw, us = k.us;
+    const pl = (n, cur) => el('span', { class: 'amt' }, sign(n) + (cur || '') + (cur ? fmt2(Math.abs(n)) : fmt(Math.abs(n))));
+    const head = el('section', { class: 'sec hero' },
+      el('p', { class: 'hero-label' }, '股票總市值'),
+      el('p', { class: 'hero-num' }, el('span', { class: 'cur' }, 'NT$'), el('span', { class: 'amt' }, fmt(t.value_twd))),
+      el('p', { class: 'hero-cmp' }, '未實現損益 ', el('b', {}, pl(t.pnl_twd)), `（${pct(t.ret)}）`),
+      el('div', { class: 'postmark', 'aria-label': `資料到 ${md(k.as_of)}` }, el('span', {}, '收盤日'), el('b', {}, md(k.as_of).replace('/', '.'))),
+      el('dl', { class: 'stats' },
+        el('div', {}, el('dt', {}, '台股'), el('dd', {}, amt(tw.value)), el('small', {}, pct(tw.ret))),
+        el('div', {}, el('dt', {}, '美股'), el('dd', {}, el('span', { class: 'amt num' }, fmt(us.value_twd))), el('small', {}, `US$ ${fmt2(us.value_usd)}　${pct(us.ret)}`)),
+        el('div', {}, el('dt', {}, '投入成本'), el('dd', {}, amt(t.cost_twd)))),
+      el('p', { class: 'muted' }, `美股以 1 美元＝${k.fx} 元換算。` + (k.stale_days > 3 ? `這是 ${k.stale_days} 天前的收盤價，不是即時報價。` : '不是即時報價。')));
+    const hist = k.history.length > 1 ? el('section', { class: 'sec' }, el('h2', {}, '每月市值'),
+      barChart(k.history, [{ key: 'value', cls: 'seg-a' }], null, () => {}, '每月底股票總市值', { labels: true }),
+      el('p', { class: 'muted' }, '市值包含每個月新投入的錢，長高不等於賺錢；最後一根是收盤日當天。')) : null;
+    const twSec = tw.items.length ? el('section', { class: 'sec' }, el('h2', {}, '台股', el('small', {}, `損益 ${sign(tw.pnl)}${fmt(Math.abs(tw.pnl))}`)),
+      el('ul', { class: 'rows' }, tw.items.map((h) => el('li', {}, el('span', { class: 'n' }, h.name, el('span', { class: 'tag' }, h.code)), amt(h.value, 'v'),
+        el('span', { class: 'm' }, `${qty(h.shares)} 股　成本 `, amt(h.cost), '　損益 ', pl(h.pnl), `（${pct(h.ret)}）`))))) : null;
+    const usSec = us.items.length ? el('section', { class: 'sec' }, el('h2', {}, '美股', el('small', {}, `損益 ${sign(us.pnl_usd)}US$ ${fmt2(Math.abs(us.pnl_usd))}`)),
+      el('ul', { class: 'rows' }, us.items.map((h) => el('li', {}, el('span', { class: 'n' }, h.name, el('span', { class: 'tag' }, h.code)),
+        el('span', { class: 'v amt' }, 'US$ ' + fmt2(h.value_usd)),
+        el('span', { class: 'm' }, `${qty(h.shares)} 股　成本 `, el('span', { class: 'amt' }, 'US$ ' + fmt2(h.cost_usd)), '　損益 ', pl(h.pnl_usd, 'US$ '), `（${pct(h.ret)}）`)))),
+      el('p', { class: 'muted' }, '換成台幣：市值 ', amt(us.value_twd), '、實際付出的台幣成本 ', amt(us.cost_twd), '、損益 ', pl(us.pnl_twd), '。')) : null;
+    const missed = k.missed_dca || [];
+    const dcaSec = k.dca.length ? el('section', { class: 'sec' }, el('h2', {}, '定期定額', el('small', {}, '每月設定')),
+      el('ul', { class: 'rows' }, k.dca.map((p) => el('li', {}, el('span', { class: 'n' }, p.name), el('span', { class: 'v amt' }, (p.ccy === 'USD' ? 'US$ ' : '') + fmt(p.amount)),
+        el('span', { class: 'm' }, `每月 ${p.day} 日　${p.market === 'US' ? '美股' : '台股'}`)))),
+      el('p', { class: 'muted' }, '每月合計 ', el('span', { class: 'amt' }, `NT$ ${fmt(k.dca_month.TWD)}＋US$ ${fmt(k.dca_month.USD)}`), '。',
+        missed.length ? ` ${[...new Set(missed.map((x) => +x.ym.slice(5) + ' 月'))].join('、')}有 ${missed.length} 筆沒成交（${missed.map((x) => x.name).join('、')}）。` : '')) : null;
+    const f = k.min_fee, extra = el('section', { class: 'sec' }, el('h2', {}, '其他'),
+      el('dl', { class: 'kv' },
+        el('dt', {}, '近 12 個月已領股利'), el('dd', {}, amt(k.dividends_twd_12m)),
+        f ? [el('dt', {}, `付過最低手續費的美股單（${f.n} 筆，占買進金額 ${f.pct}%）`), el('dd', {}, el('span', { class: 'amt' }, 'US$ ' + fmt(f.fee_usd)))] : null),
+      k.notes.map((n) => el('p', { class: 'para' }, n)));
+    return [head, hist, twSec, usSec, dcaSec, extra, el('p', { class: 'foot' }, '數字來自券商 app 的庫存畫面與對帳單，由帳本整理；不是買賣建議。')];
+  }
+
   // ---------------------------------------------------------------- setup + settings
   function viewSetup(err) {
     const ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -457,8 +501,9 @@
       return;
     }
     const d = S.data, m = d.month;
-    const views = { home: viewHome, advice: viewAdvice, tx: viewTx, trend: viewTrend };
-    const TITLES = { home: `${+m.ym.slice(5)} 月`, advice: '匯報', tx: '明細', trend: '趨勢' };
+    const views = { home: viewHome, advice: viewAdvice, tx: viewTx, trend: viewTrend, stocks: viewStocks };
+    if (S.tab === 'stocks' && !d.stocks) S.tab = 'home';
+    const TITLES = { home: `${+m.ym.slice(5)} 月`, advice: '匯報', tx: '明細', trend: '趨勢', stocks: '股票' };
     const b = S.demo ? { text: '這是示範資料，不是你的帳。', demo: true } : S.banner;
     const banner = b ? el('div', { class: 'banner' + (b.err ? ' err' : '') }, el('span', {}, b.text),
       b.demo ? el('button', { onclick: () => { store.del(LS.demo); S.demo = false; S.data = null; render(); } }, '輸入設定碼')
@@ -469,9 +514,10 @@
     const top = el('header', { class: 'top' },
       el('h1', {}, TITLES[S.tab], S.tab === 'home' ? el('span', { class: 'sub' }, `第 ${m.cmp_day || m.day} 天，共 ${m.days} 天`) : null),
       el('div', {}, eye, el('button', { class: 'icon-btn', 'aria-label': '設定', onclick: openSettings }, icon(IC.gear))));
-    const tabs = el('div', { class: 'tabbar' }, el('nav', { 'aria-label': '主選單' },
-      [['home', '總覽'], ['advice', '匯報'], ['tx', '明細'], ['trend', '趨勢']].map(([k, n]) =>
-        el('button', { 'aria-current': S.tab === k ? 'page' : null, onclick: tabBtn(k) }, n))));
+    const tabList = [['home', '總覽'], ['advice', '匯報'], ['tx', '明細'], ['trend', '趨勢']].concat(d.stocks ? [['stocks', '股票']] : []);
+    const nav = el('nav', { 'aria-label': '主選單' }, tabList.map(([k, n]) => el('button', { 'aria-current': S.tab === k ? 'page' : null, onclick: tabBtn(k) }, n)));
+    nav.style.setProperty('--tabs', tabList.length);
+    const tabs = el('div', { class: 'tabbar' }, nav);
     root.replaceChildren(el('main', { class: 'shell' }, top, banner, views[S.tab](d)), tabs);
   }
 
