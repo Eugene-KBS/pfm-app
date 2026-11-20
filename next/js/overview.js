@@ -121,8 +121,8 @@ function cashCard(d) {
   return group('現金與淨資產', [el('ul', { class: 'list' },
     c.items.map((x) => row({ title: x.name, sub: x.as_of ? `${md(x.as_of)} 的餘額` : null, value: x.amount < 0 ? samt(x.amount) : amt(x.amount) })),
     c.stocks != null ? row({ title: '股票（收盤價估）', sub: c.stocks_date ? `${md(c.stocks_date)} 收盤` : null, value: amt(c.stocks) }) : null,
-    row({ title: el('b', {}, '淨資產'), value: el('b', {}, samt(c.net)) }))],
-  { foot: '餘額是最後一次看到的數字（對帳單、匯出檔或截圖），不是即時餘額。' });
+    row({ title: el('b', {}, '已知資產減負債'), sub: '不含房產與還沒接上的帳戶', value: el('b', {}, samt(c.net)) }))],
+  { foot: '餘額是最後一次看到的數字（對帳單、匯出檔或截圖），不是即時餘額；房屋本身的價值沒有算進來。' });
 }
 
 function weeklyCard(d) {

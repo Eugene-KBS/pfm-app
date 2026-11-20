@@ -29,7 +29,7 @@ export function monthBars(months, selYm, onSel) {
       return sv('path', { class: cls, d: `M${x},${H - B}V${yy + r}Q${x},${yy} ${x + r},${yy}H${x + bw - r}Q${x + bw},${yy} ${x + bw},${yy + r}V${H - B}Z` });
     };
     grp.append(bar(cx - bw - 0.8, m.income, 'b-in'), bar(cx + 0.8, m.expense_net, 'b-out'));
-    if (part) grp.append(sv('circle', { cx, cy: H - B + 22, r: 2.2, fill: 'none', stroke: 'currentColor', class: 'incomplete', style: 'color:var(--label-2)' }));
+    if (part) grp.append(sv('text', { x: cx, y: H - B + 25, 'text-anchor': 'middle', style: 'font-size:8px;fill:var(--label-3)' }, '◌'));
     const mon = +m.ym.slice(5);
     grp.append(sv('text', { x: cx, y: H - B + 13, 'text-anchor': 'middle', style: on ? 'fill:var(--tint);font-weight:600' : null }, mon === 1 ? `${m.ym.slice(2, 4)}/1` : mon));
     const hit = sv('rect', { x: cx - band / 2, y: 0, width: band, height: H, fill: 'transparent' });

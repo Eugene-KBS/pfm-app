@@ -1,6 +1,6 @@
 /* 收支帳 v2 service worker: caches the app shell only (never the encrypted data or API calls), shows push
    notifications, opens the right screen when one is tapped, and sets the app badge. */
-const CACHE = 'pfm-shell-2.0.0-1';
+const CACHE = 'pfm-shell-2.0.0-2';
 const ASSETS = ['./', 'index.html', 'css/app.css', 'js/main.js', 'js/util.js', 'js/crypto.js', 'js/data.js', 'js/charts.js', 'js/sheet.js',
   'js/actions.js', 'js/overview.js', 'js/tx.js', 'js/stocks.js', 'js/plan.js', 'js/settings.js', 'manifest.webmanifest',
   'demo-data.json', 'demo-prices.json', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/icon-maskable-512.png', 'icons/apple-touch-icon.png'];
