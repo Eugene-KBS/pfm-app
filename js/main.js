@@ -173,7 +173,7 @@ async function registerSW() {
     reg = await navigator.serviceWorker.register('sw.js');
     reg.addEventListener('updatefound', () => {
       const nw = reg.installing;
-      nw && nw.addEventListener('statechange', () => { if (nw.state === 'installed' && navigator.serviceWorker.controller) { app.updateReady = nw; render({ all: true }); } });
+      nw && nw.addEventListener('statechange', () => { if (nw.state === 'installed' && navigator.serviceWorker.controller) setTimeout(() => { if (reg.waiting) { app.updateReady = reg.waiting; render({ all: true }); } }, 1500); });
     });
     navigator.serviceWorker.addEventListener('message', (e) => { if (e.data && e.data.go) handleGo(e.data.go); });
   } catch (e) { /* offline first load */ }

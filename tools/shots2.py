@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Screenshot the v2 app (next/) in demo mode at iPhone size, light and dark: every tab plus the main sheets.
+"""Screenshot the v2 app (root) in demo mode at iPhone size, light and dark: every tab plus the main sheets.
 Usage: python3 tools/shots2.py [outdir]   (needs playwright + Chrome; set CHROME to override the binary)"""
 import asyncio, os, subprocess, sys, time
 from playwright.async_api import async_playwright
@@ -24,7 +24,7 @@ async def main():
                 pg = await c.new_page()
                 pg.on("console", lambda m: problems.append(f"{scheme}: {m.text}") if m.type == "error" else None)
                 pg.on("pageerror", lambda e: problems.append(f"{scheme}: {e}"))
-                await pg.goto(f"http://127.0.0.1:{PORT}/next/")
+                await pg.goto(f"http://127.0.0.1:{PORT}/")
                 await pg.click("text=先看示範資料")
                 await pg.wait_for_selector(".tabbar")
                 await pg.wait_for_timeout(700)

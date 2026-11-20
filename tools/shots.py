@@ -22,7 +22,7 @@ async def main():
                 pg = await c.new_page()
                 pg.on("console", lambda m: problems.append(m.text) if m.type == "error" else None)
                 pg.on("pageerror", lambda e: problems.append(str(e)))
-                await pg.goto("http://127.0.0.1:8766/")
+                await pg.goto("http://127.0.0.1:8766/v1/")
                 await pg.click("text=先看示範資料")
                 await pg.wait_for_selector(".hero-num")
                 await pg.wait_for_timeout(900)

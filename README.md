@@ -13,11 +13,14 @@ A small, dependency-free progressive web app that shows a personal spending over
 
 Files: `index.html`, `style.css`, `app.js`, `sw.js` (offline shell cache), `manifest.webmanifest`, `icons/`.
 
-## v2 preview (`next/`) and widget
+## v2 (live since 2026-11-20) and widget
 
-- `next/` is version 2 of the app (five tabs, to-do list, write-back through encrypted GitHub Issues, Web Push,
-  daily closing prices with a drawn chart). It is developed here and moves to the root once it is approved.
-  ES modules, no build step, the same strict CSP; demo data in `next/demo-*.json` is fictional (`make_demo.py`).
+- The root is version 2 (five tabs, to-do list, write-back through encrypted GitHub Issues, Web Push, daily closing
+  prices with a drawn chart). ES modules, no build step, the same strict CSP; `demo-*.json` is fictional (`make_demo.py`).
+  It reuses the v1 keys in localStorage (`pfm.token`, `pfm.setup`), so the existing home-screen icon needs no new setup.
+- `v1/` keeps version 1 as a fallback (own service-worker cache `pfm-v1-…`). `next/` (the former preview) only tells
+  visitors to use the main icon and removes its own service worker.
 - `widget/pfm-widget.js` is a Scriptable home-screen widget. It contains no keys: the GitHub token and the widget
   key are pasted once and kept in the iPhone Keychain; the data file is AES-256-GCM, decrypted in plain JavaScript.
-- `tools/shots2.py` screenshots every v2 tab and the main sheets at iPhone size in light and dark mode.
+- `tools/shots2.py` screenshots every v2 tab and the main sheets at iPhone size in light and dark mode; `tools/shots.py` does v1 at `/v1/`.
+- Pages is served from the `gh-pages` branch: push `main` and `main:gh-pages` together.
