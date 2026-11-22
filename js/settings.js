@@ -127,6 +127,7 @@ function openWidgetHelp() {
 }
 function openChangelog() {
   openSheet({ title: '更新紀錄', body: [group(null, el('ul', { class: 'list' },
+    row({ title: '2.0.1', sub: '每個彈出頁面都有多種離開方式：右上角 ×、底部「關閉」、往下拉（內容在最上面時任何地方都可以拉）、從左邊緣往右滑、點上方暗處；頁首不再被狀態列蓋住。', wrapSub: true }),
     row({ title: '2.0.0', sub: '新版：五個分頁、待處理清單、本月結餘與日常支出上限、12 個月收支、全部交易與分類回寫、補錢清單與發薪日建議、訂閱與異常、月結與週摘要、每日收盤價與自繪走勢圖、app 通知、主畫面小工具、深色模式與文字大小。', wrapSub: true }),
     row({ title: '1.1.0', sub: '股票分頁。', wrapSub: true }),
     row({ title: '1.0.0', sub: '第一版：本月支出、匯報、明細、趨勢。', wrapSub: true })))] });

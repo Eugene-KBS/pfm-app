@@ -2,7 +2,7 @@
 import { store, toast } from './util.js';
 import { parseSetup, decryptEnvelope, sealCommands, b64u, b64uEnc } from './crypto.js';
 
-export const VERSION = '2.0.0';
+export const VERSION = '2.0.1';
 export const LS = {
   token: 'pfm.token', setup: 'pfm.setup',                     // shared with v1: no new setup after the switch
   env: 'pfm2.env', fetched: 'pfm2.fetched', penv: 'pfm2.penv', prefs: 'pfm2.ui', queue: 'pfm2.queue', dev: 'pfm2.dev',
