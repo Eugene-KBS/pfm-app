@@ -2,7 +2,7 @@
 import { store, toast } from './util.js';
 import { parseSetup, decryptEnvelope, sealCommands, b64u, b64uEnc } from './crypto.js';
 
-export const VERSION = '2.0.1';
+export const VERSION = '2.1.0';
 export const LS = {
   token: 'pfm.token', setup: 'pfm.setup',                     // shared with v1: no new setup after the switch
   env: 'pfm2.env', fetched: 'pfm2.fetched', penv: 'pfm2.penv', prefs: 'pfm2.ui', queue: 'pfm2.queue', dev: 'pfm2.dev',
@@ -120,13 +120,13 @@ function dev() {
 function nextSeq() { const n = (+store.get(LS.seq) || 0) + 1; store.set(LS.seq, String(n)); return n; }
 function saveQueue() { store.setJson(LS.queue, S.queue); }
 let flushT = null;
-export function queueCmd(cmd, label) {
+export function queueCmd(cmd, label, when) {          // `when`: optional replacement for the default 明早更新後生效 toast wording
   let batch = S.queue.find((b) => !b.sent);
   if (!batch) { batch = { seq: nextSeq(), ts: new Date().toISOString(), cmds: [], sent: false }; S.queue.push(batch); }
   batch.cmds.push(cmd);
   saveQueue();
   changed('queue');
-  if (label) toast(label + (S.demo ? '（示範模式不會送出）' : '　明早更新後生效'));
+  if (label) toast(label + (S.demo ? '（示範模式不會送出）' : '　' + (when || '明早更新後生效')));
   clearTimeout(flushT);
   flushT = setTimeout(flush, 1500);
 }
@@ -165,7 +165,9 @@ export function reconcileQueue() {
 }
 /* What the not-yet-applied commands change, so the screen reflects them at once. */
 export function pendingView() {
-  const v = { todo: new Set(), cls: {}, flag: {}, answered: new Set(), set: {} };
+  // 顧問 (2.1.0): nw = house / First Bank values {h1,h2,fcb} (the later command wins, as in the pipeline), wl = ticked whitelist ids or null,
+  // adv = pending advisor settings {fcb_on, ai_on, reserve_months, cuts} (the same values are also in .set under their adv_* keys)
+  const v = { todo: new Set(), cls: {}, flag: {}, answered: new Set(), set: {}, nw: {}, wl: null, adv: {} };
   for (const b of S.queue) {
     for (const c of b.cmds) {
       const [op, a] = Object.entries(c)[0];
@@ -173,7 +175,9 @@ export function pendingView() {
       else if (op === 'classify') { v.cls[a.txn_id] = a; v.todo.add('classify:' + a.txn_id); }
       else if (op === 'flag') v.flag[a.txn_id] = Object.assign(v.flag[a.txn_id] || {}, a);
       else if (op === 'answer') { v.answered.add(a.key); v.todo.add('question:' + a.key); }
-      else if (op === 'set') v.set[a.k] = a.v;
+      else if (op === 'set') { v.set[a.k] = a.v; if (/^adv_/.test(a.k)) v.adv[a.k.slice(4)] = a.v; }
+      else if (op === 'nw_set' && a && (a.k === 'h1' || a.k === 'h2' || a.k === 'fcb')) v.nw[a.k] = a;
+      else if (op === 'wl_set' && a && Array.isArray(a.ids)) v.wl = a.ids.slice();
     }
   }
   return v;

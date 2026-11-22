@@ -4,14 +4,14 @@
  * 期望值來自獨立的 Python 參考實作（numpy 全網格＋math.erf；腳本不在 repo）。真實權重的案例 1 由主對話另行驗證。
  * V2 審查 A-1 之後：cma.mu 是年化複利（幾何）報酬，模型用漂移 d_i = ln(1+mu_i) + σ_i²/2 再扣 σp²/2；
  * 下列所有「現況／案例／不可行」期望值都是以新公式由 Python 參考實作重算（不是沿用舊值、也不是由被測程式反推）。
- * 另有「單一類別 100% → median 恰等於該類 mu」的性質測試（七類都測，容差 1e-9），含 next/data/cma.json 的實際檔案。 */
+ * 另有「單一類別 100% → median 恰等於該類 mu」的性質測試（七類都測，容差 1e-9），含 data/cma.json 的實際檔案。 */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
-import * as A from '../next/js/advisor_calc.js';
+import * as A from '../js/advisor_calc.js';
 
-const MODULE_URL = new URL('../next/js/advisor_calc.js', import.meta.url).href;
+const MODULE_URL = new URL('../js/advisor_calc.js', import.meta.url).href;
 const BANNED = /買進|賣出|買入|賣掉|加碼|減碼|出清|停損|停利|獲利了結|進場|出場|抄底|buy|sell/i;   // 畫面文字禁用字詞（§0／§5.6）
 const near = (a, b, tol, label) => assert.ok(Math.abs(a - b) <= tol, `${label ?? ''} expected ${b}, got ${a} (tol ${tol})`);
 const nearArr = (a, b, tol, label) => { assert.equal(a.length, b.length); a.forEach((x, i) => near(x, b[i], tol, `${label ?? ''}[${i}]`)); };
@@ -154,8 +154,8 @@ test('A-1 驗收性質：單一類別 100%（無個股）→ median 恰等於該
   }
 });
 
-test('A-1：實際檔案 next/data/cma.json 也滿足「單類 100% → median＝mu」，且 mu_kind＝geometric', () => {
-  const real = JSON.parse(readFileSync(new URL('../next/data/cma.json', import.meta.url), 'utf8'));
+test('A-1：實際檔案 data/cma.json 也滿足「單類 100% → median＝mu」，且 mu_kind＝geometric', () => {
+  const real = JSON.parse(readFileSync(new URL('../data/cma.json', import.meta.url), 'utf8'));
   assert.equal(real.mu_kind, 'geometric');
   assert.deepEqual(A.validateCma(real), { ok: true });
   for (let i = 0; i < 7; i++) near(A.portfolioStats(unit(i), real).median, real.classes[i].mu, 1e-9, `real ${A.CLS[i]}`);

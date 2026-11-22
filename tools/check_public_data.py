@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """check_public_data.py — schema and hygiene check for the advisor tab's public data files (PFM-ADVISOR-SPEC §3.3).
 
-  python3 tools/check_public_data.py <dir>                 e.g. next/data   (checks the files that exist; at least one)
+  python3 tools/check_public_data.py <dir>                 e.g. data   (checks the files that exist; at least one)
   python3 tools/check_public_data.py <dir> --require-all   all of benchmarks.json, cma.json, whitelist.json must exist
   python3 tools/check_public_data.py --selftest            built-in made-up samples + deliberately broken ones
 
@@ -853,14 +853,14 @@ def selftest():
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Check the advisor tab's public data files (benchmarks.json, cma.json, whitelist.json).")
-    ap.add_argument("dir", nargs="?", help="directory holding the files, e.g. next/data")
+    ap.add_argument("dir", nargs="?", help="directory holding the files, e.g. data")
     ap.add_argument("--require-all", action="store_true", help="all three files must exist")
     ap.add_argument("--selftest", action="store_true", help="run the built-in samples and exit")
     a = ap.parse_args(argv)
     if a.selftest:
         return selftest()
     if not a.dir:
-        ap.error("給目錄（例：next/data）或用 --selftest")
+        ap.error("給目錄（例：data）或用 --selftest")
     return check_dir(a.dir, require_all=a.require_all)
 
 

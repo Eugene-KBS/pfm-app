@@ -6,6 +6,8 @@ import { viewOverview } from './overview.js';
 import { viewTx } from './tx.js';
 import { viewStocks } from './stocks.js';
 import { viewPlan } from './plan.js';
+import { viewAdvisor } from './advisor.js';
+import './advisor_settings.js';
 import { viewSettings, applyUi } from './settings.js';
 import { visibleTodos, openTodo, openTx, txById } from './actions.js';
 import { closeAllSheets } from './sheet.js';
@@ -16,6 +18,7 @@ const TABS = [
   ['tx', '明細', IC.list, viewTx],
   ['stocks', '股票', IC.chart, viewStocks],
   ['plan', '計畫', IC.cal, viewPlan],
+  ['advisor', '顧問', IC.advisor, viewAdvisor],
   ['settings', '設定', IC.gear, viewSettings],
 ];
 const app = {
@@ -62,6 +65,7 @@ function titleFor(tab) {
   if (tab === 'tx') return ['明細', `${d.tx.length.toLocaleString()} 筆交易`];
   if (tab === 'stocks') return ['股票', d.stocks_live ? `${md(d.stocks_live.as_of)} 收盤` : ''];
   if (tab === 'plan') return ['計畫', '補錢、現金流、訂閱、月結'];
+  if (tab === 'advisor') return ['顧問', d.advisor && d.advisor.as_of ? `資料至 ${md(d.advisor.as_of)}` : ''];
   return ['設定', `版本 ${VERSION}`];
 }
 

@@ -44,6 +44,7 @@ export const IC = {
   clock: ['M12 21a9 9 0 100-18 9 9 0 000 18z', 'M12 7v5l3 2'],
   bell: ['M6 9a6 6 0 0112 0c0 6 2.5 7.5 2.5 7.5h-17S6 15 6 9z', 'M10 20a2 2 0 004 0'],
   repeat: ['M17 2l4 4-4 4', 'M3 11V9a3 3 0 013-3h15', 'M7 22l-4-4 4-4', 'M21 13v2a3 3 0 01-3 3H3'],
+  advisor: ['M19.5 12.5A8 8 0 1 1 11.5 4.5v8z', 'M13 3a8 8 0 0 1 8 8h-8z'],      // pie with one slice pulled out: 顧問 (allocation)
 };
 export function chevron() {
   return sv('svg', { class: 'chev', viewBox: '0 0 8 13', 'aria-hidden': 'true' }, sv('path', { d: 'M1.5 1.5l5 5-5 5' }));

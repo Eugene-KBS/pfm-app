@@ -3,6 +3,7 @@ import { el, group, row, amt, fmt, stamp, md, toast } from './util.js';
 import { openSheet } from './sheet.js';
 import { S, VERSION, saveUi, queueCmd, pref, pushSupport, enablePush, disablePush, checkWrite, pendingCount, unsentCount, signOut, leaveDemo, refresh, LS } from './data.js';
 import { CARD_NAMES } from './overview.js';
+import { openAdvisorSettings } from './advisor_settings.js';
 import { store } from './util.js';
 
 export function applyUi() {
@@ -56,6 +57,9 @@ export function viewSettings(app) {
     stepRow('扣款前提醒', 'remind_days', 1, 0, 10, '通知在最晚補錢日前幾天', app),
     stepRow('股票漲跌門檻', 'move_pct', 0.5, 0.5, 20, '平日超過才寫一句話', app)),
   { foot: '改動會送到帳本，明早更新後生效。' }));
+  out.push(group('顧問', el('ul', { class: 'list' },
+    row({ title: '顧問設定', sub: '房屋市值、一銀房貸、候選名單、切點、預備金月數、AI 解讀', wrapSub: true, chevron: true, onClick: () => openAdvisorSettings() })),
+  { foot: '參考試算用的設定；送出後明早更新生效。' }));
   out.push(group('通知', el('ul', { class: 'list' },
     row({ title: subscribed ? '通知已開啟' : '開啟通知', sub: sup.ok ? (subscribed ? (d.push?.last_ok ? `上次送達 ${md(d.push.last_ok)}` : '明早更新後開始收到') : '每天早上更新後，有事才會跳通知') : sup.why,
       value: sup.ok ? el('button', { class: 'pill' + (subscribed ? ' gray' : ''), onclick: async () => {
@@ -127,6 +131,7 @@ function openWidgetHelp() {
 }
 function openChangelog() {
   openSheet({ title: '更新紀錄', body: [group(null, el('ul', { class: 'list' },
+    row({ title: '2.1.0', sub: '新增「顧問」分頁（參考試算，非投資建議）：資產負債、預備金、目前配置、股票總投報與報酬區間、互動計算表、資金需求試算、AI 解讀；「顧問設定」可填房屋市值與一銀房貸、勾選候選名單、調整切點與預備金月數、開關 AI 解讀。', wrapSub: true }),
     row({ title: '2.0.1', sub: '每個彈出頁面都有多種離開方式：右上角 ×、底部「關閉」、往下拉（內容在最上面時任何地方都可以拉）、從左邊緣往右滑、點上方暗處；頁首不再被狀態列蓋住。', wrapSub: true }),
     row({ title: '2.0.0', sub: '新版：五個分頁、待處理清單、本月結餘與日常支出上限、12 個月收支、全部交易與分類回寫、補錢清單與發薪日建議、訂閱與異常、月結與週摘要、每日收盤價與自繪走勢圖、app 通知、主畫面小工具、深色模式與文字大小。', wrapSub: true }),
     row({ title: '1.1.0', sub: '股票分頁。', wrapSub: true }),

@@ -13,17 +13,18 @@ A small, dependency-free progressive web app that shows a personal spending over
 
 Files: `index.html`, `style.css`, `app.js`, `sw.js` (offline shell cache), `manifest.webmanifest`, `icons/`.
 
-## v2 (live since 2026-11-20) and widget
+## v2.1 (v2 live since 2026-11-20; 顧問 tab since 2026-11-22) and widget
 
-- The root is version 2 (five tabs, to-do list, write-back through encrypted GitHub Issues, Web Push, daily closing
+- The root is version 2.1 (six tabs: the five below plus 顧問 "advisor"; to-do list, write-back through encrypted GitHub Issues, Web Push, daily closing
   prices with a drawn chart). ES modules, no build step, the same strict CSP; `demo-*.json` is fictional (`make_demo.py`).
   It reuses the v1 keys in localStorage (`pfm.token`, `pfm.setup`), so the existing home-screen icon needs no new setup.
-- `v1/` keeps version 1 as a fallback (own service-worker cache `pfm-v1-…`). `next/` is the preview of version 2.1.0 (six tabs: the five
-  above plus 顧問 "advisor"), with its own service-worker cache `pfm-next-…`.
+- `v1/` keeps version 1 as a fallback (own service-worker cache `pfm-v1-…`). `next/` is retired: it is a one-page notice whose
+  service worker unregisters itself and clears the `pfm-next-…` caches, so the old preview icon stops working cleanly.
+  Rollback of the 2.1.0 swap: `git revert` the swap commit and push `main` and `main:gh-pages` together.
 - `widget/pfm-widget.js` is a Scriptable home-screen widget. It contains no keys: the GitHub token and the widget
   key are pasted once and kept in the iPhone Keychain; the data file is AES-256-GCM, decrypted in plain JavaScript.
 - `tools/shots2.py` screenshots every v2 tab and the main sheets at iPhone size in light and dark mode; `tools/shots.py` does v1 at `/v1/`.
 - Pages is served from the `gh-pages` branch: push `main` and `main:gh-pages` together.
-- The 顧問 tab: net worth, reserve, allocation, return spectrum, what-if calculator, funds-needed estimate, settings; reference calculations only, not investment advice. `next/` replaces the root only after it is approved.
-  `next/data/*.json` are public reference data (capital market assumptions, candidate ETF pool, benchmarks and fees) and
+- The 顧問 tab: net worth, reserve, allocation, return spectrum, what-if calculator, funds-needed estimate, settings; reference calculations only, not investment advice.
+  `data/*.json` are public reference data (capital market assumptions, candidate ETF pool, benchmarks and fees) and
   contain no personal data. Checks: `tools/check_public_data.py` (public data) and `tools/test_advisor_calc.mjs` (calculation tests).
