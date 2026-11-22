@@ -1,0 +1,624 @@
+{
+  "rev": 1,
+  "as_of": "2026-11-22",
+  "note": "候選池，不是推薦：名單只是供使用者在 app 內勾選的起點，不構成投資建議。選取標準為規模大、費用率低、追蹤誤差小、流動性佳、代表性強，不依近期績效。費用率口徑：台股ETF為MoneyDJ年報口徑總管理費用率（含交易成本等非管理費用），美股ETF為發行商公開的expense ratio，兩者不能直接相比；各檔資料日期見 er_date 與 src；status 為待確認者請先查證再參考。",
+  "items": [
+    {
+      "id": "TW:0050",
+      "mkt": "TW",
+      "code": "0050",
+      "name": "元大台灣50（元大台灣卓越50 ETF）",
+      "cls": "tw_eq",
+      "ccy": "TWD",
+      "er_pct": 0.22,
+      "er_date": "2026-11-20",
+      "dist": "半年配（6月30日、12月31日為收益分配評價日）",
+      "min_fee_note": "手續費由券商訂定、上限千分之1.425；中信證券靚亮存（台股定期定股／小額零股）手續費優惠至2026-12-31：交易金額2萬元以下每筆1元（每筆先預收20元，多餘退回）；證券交易稅以券商為準",
+      "settle": "T+2",
+      "dca_ok": "待確認",
+      "note": "追蹤富時臺灣證交所臺灣50指數；規模約2.2兆台幣（2026-11-20）；費用率0.22%為MoneyDJ年報口徑總管理費用率（含非管理費用0.07%），元大官網現行經理費約0.07%（級距制、2026-11-20），兩者期間與口徑不同，採用口徑待確認；靚亮存僅限盤中零股標的、官網未列個別清單，能否定期投入待確認",
+      "src": [
+        {
+          "title": "MoneyDJ ETF 基本資料 0050（總管理費用率、經理費、規模、配息頻率、追蹤指數）",
+          "url": "https://www.moneydj.com/etf/x/basic/basic0004.xdjhtm?etfid=0050.tw",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "元大投信 0050 基本資訊（經理費約0.0706%與級距、保管費級距）",
+          "url": "https://www.yuantaetfs.com/product/detail/0050/Basic_information",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "winvest ETF 基本資料 0050（契約管理費與保管費級距、收益分配）",
+          "url": "https://winvest.tw/Stock/Symbol/EtfInformation/0050",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "臺灣證券交易所 ETF 清單（上市日期、發行人、標的指數）",
+          "url": "https://www.twse.com.tw/rwd/zh/ETF/list?response=json",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "臺灣證券交易所 OpenAPI 每日收盤行情（確認掛牌與成交）",
+          "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "中國信託證券 靚亮存（台股定期定股／小額零股）說明與費用",
+          "url": "https://www.ctbcsec.com/2020/_event/dca_tw/index.html",
+          "date": "2026-11-22"
+        }
+      ],
+      "status": "待確認"
+    },
+    {
+      "id": "TW:006208",
+      "mkt": "TW",
+      "code": "006208",
+      "name": "富邦台50",
+      "cls": "tw_eq",
+      "ccy": "TWD",
+      "er_pct": 0.23,
+      "er_date": "2026-11-20",
+      "dist": "半年配（6月30日、10月31日為收益分配評價日）",
+      "min_fee_note": "手續費由券商訂定、上限千分之1.425；中信證券靚亮存（台股定期定股／小額零股）手續費優惠至2026-12-31：交易金額2萬元以下每筆1元（每筆先預收20元，多餘退回）；證券交易稅以券商為準",
+      "settle": "T+2",
+      "dca_ok": "待確認",
+      "note": "追蹤富時臺灣證交所臺灣50指數（與0050同指數）；規模約3,724億台幣（2026-11-20）；費用率0.23%為MoneyDJ年報口徑總管理費用率（含非管理費用0.13%）；富邦官網載經理費率級距0.15%/0.10%/0.08%、保管費0.03%起；富邦官網另有分割議案時程公告；靚亮存僅限盤中零股標的、官網未列個別清單，能否定期投入待確認",
+      "src": [
+        {
+          "title": "MoneyDJ ETF 基本資料 006208（總管理費用率、經理費、規模、配息頻率、追蹤指數）",
+          "url": "https://www.moneydj.com/etf/x/basic/basic0004.xdjhtm?etfid=006208.tw",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "富邦投信 富邦台50 基金總覽（費率級距、收益分配、保管銀行）",
+          "url": "https://www.fubon.com/asset-management/fund/info/fund?Fd=40",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "winvest ETF 基本資料 006208（契約管理費與保管費級距、收益分配）",
+          "url": "https://winvest.tw/Stock/Symbol/EtfInformation/006208",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "臺灣證券交易所 ETF 清單（上市日期、發行人、標的指數）",
+          "url": "https://www.twse.com.tw/rwd/zh/ETF/list?response=json",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "臺灣證券交易所 OpenAPI 每日收盤行情（確認掛牌與成交）",
+          "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "中國信託證券 靚亮存（台股定期定股／小額零股）說明與費用",
+          "url": "https://www.ctbcsec.com/2020/_event/dca_tw/index.html",
+          "date": "2026-11-22"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "TW:00646",
+      "mkt": "TW",
+      "code": "00646",
+      "name": "元大S&P500（元大標普500 ETF）",
+      "cls": "us_eq",
+      "ccy": "TWD",
+      "er_pct": 0.36,
+      "er_date": "2026-11-20",
+      "dist": "年配（每年9月30日為收益分配評價日）",
+      "min_fee_note": "手續費由券商訂定、上限千分之1.425；中信證券靚亮存（台股定期定股／小額零股）手續費優惠至2026-12-31：交易金額2萬元以下每筆1元（每筆先預收20元，多餘退回）；證券交易稅以券商為準",
+      "settle": "T+2",
+      "dca_ok": "待確認",
+      "note": "台幣計價、追蹤標普500指數，含美元匯率成分；規模約473億台幣（2026-11-20）；費用率0.36%為MoneyDJ年報口徑總管理費用率（含非管理費用0.06%）；兩來源的保管費不一致：元大官網為級距0.11%至0.06%、winvest 為0.21%，費用率與保管費口徑待確認；靚亮存僅限盤中零股標的、官網未列個別清單，能否定期投入待確認",
+      "src": [
+        {
+          "title": "MoneyDJ ETF 基本資料 00646（總管理費用率、經理費、規模、配息頻率、追蹤指數）",
+          "url": "https://www.moneydj.com/etf/x/basic/basic0004.xdjhtm?etfid=00646.tw",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "元大投信 00646 基本資訊（經理費與保管費級距）",
+          "url": "https://www.yuantaetfs.com/product/detail/00646/Basic_information",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "winvest ETF 基本資料 00646（契約管理費與保管費級距、收益分配）",
+          "url": "https://winvest.tw/Stock/Symbol/EtfInformation/00646",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "臺灣證券交易所 ETF 清單（上市日期、發行人、標的指數）",
+          "url": "https://www.twse.com.tw/rwd/zh/ETF/list?response=json",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "臺灣證券交易所 OpenAPI 每日收盤行情（確認掛牌與成交）",
+          "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "中國信託證券 靚亮存（台股定期定股／小額零股）說明與費用",
+          "url": "https://www.ctbcsec.com/2020/_event/dca_tw/index.html",
+          "date": "2026-11-22"
+        }
+      ],
+      "status": "待確認"
+    },
+    {
+      "id": "TW:00662",
+      "mkt": "TW",
+      "code": "00662",
+      "name": "富邦NASDAQ（富邦NASDAQ-100 ETF）",
+      "cls": "us_tech",
+      "ccy": "TWD",
+      "er_pct": 0.54,
+      "er_date": "2026-11-20",
+      "dist": "不配息（收益全部併入基金資產）",
+      "min_fee_note": "手續費由券商訂定、上限千分之1.425；中信證券靚亮存（台股定期定股／小額零股）手續費優惠至2026-12-31：交易金額2萬元以下每筆1元（每筆先預收20元，多餘退回）；證券交易稅以券商為準",
+      "settle": "T+2",
+      "dca_ok": "待確認",
+      "note": "台幣計價、追蹤NASDAQ-100指數，含美元匯率成分；規模約1,154億台幣（2026-11-19）；費用率0.54%為MoneyDJ年報口徑總管理費用率（含非管理費用0.24%）；富邦官網載經理費率0.3%、保管費級距0.21%/0.18%/0.16%；靚亮存僅限盤中零股標的、官網未列個別清單，能否定期投入待確認",
+      "src": [
+        {
+          "title": "MoneyDJ ETF 基本資料 00662（總管理費用率、經理費、規模、配息頻率、追蹤指數）",
+          "url": "https://www.moneydj.com/etf/x/basic/basic0004.xdjhtm?etfid=00662.tw",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "富邦投信 富邦NASDAQ 基金總覽（費率、收益分配、保管銀行）",
+          "url": "https://www.fubon.com/asset-management/fund/info/fund?Fd=55",
+          "date": "2026-11-19"
+        },
+        {
+          "title": "winvest ETF 基本資料 00662（契約管理費與保管費級距、收益分配）",
+          "url": "https://winvest.tw/Stock/Symbol/EtfInformation/00662",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "臺灣證券交易所 ETF 清單（上市日期、發行人、標的指數）",
+          "url": "https://www.twse.com.tw/rwd/zh/ETF/list?response=json",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "臺灣證券交易所 OpenAPI 每日收盤行情（確認掛牌與成交）",
+          "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "中國信託證券 靚亮存（台股定期定股／小額零股）說明與費用",
+          "url": "https://www.ctbcsec.com/2020/_event/dca_tw/index.html",
+          "date": "2026-11-22"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "TW:00679B",
+      "mkt": "TW",
+      "code": "00679B",
+      "name": "元大美債20年（元大美國政府20年期以上債券 ETF）",
+      "cls": "bond_l",
+      "ccy": "TWD",
+      "er_pct": 0.14,
+      "er_date": "2026-11-20",
+      "dist": "季配",
+      "min_fee_note": "手續費由券商訂定、上限千分之1.425；中信證券靚亮存（台股定期定股／小額零股）手續費優惠至2026-12-31：交易金額2萬元以下每筆1元（每筆先預收20元，多餘退回）；證券交易稅以券商為準",
+      "settle": "T+2",
+      "dca_ok": "待確認",
+      "note": "上櫃債券ETF；追蹤ICE美國政府20+年期債券指數；台幣計價含美元匯率成分；存續期間長，價格對利率變動敏感；規模約1,546億台幣（2026-11-20）；費用率0.14%為MoneyDJ年報口徑總管理費用率（含非管理費用0.04%）；靚亮存僅限盤中零股標的、官網未列個別清單，上櫃債券ETF能否定期投入待確認",
+      "src": [
+        {
+          "title": "MoneyDJ ETF 基本資料 00679B（總管理費用率、經理費、規模、配息頻率、追蹤指數）",
+          "url": "https://www.moneydj.com/etf/x/basic/basic0004.xdjhtm?etfid=00679b.tw",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "元大投信 00679B 基本資訊（經理費與保管費級距、標的指數）",
+          "url": "https://www.yuantaetfs.com/product/detail/00679B/Basic_information",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "winvest ETF 基本資料 00679B（契約管理費與保管費級距、收益分配）",
+          "url": "https://winvest.tw/Stock/Symbol/EtfInformation/00679B",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "證券櫃檯買賣中心 OpenAPI 每日收盤行情（確認上櫃掛牌與成交）",
+          "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "中國信託證券 靚亮存（台股定期定股／小額零股）說明與費用",
+          "url": "https://www.ctbcsec.com/2020/_event/dca_tw/index.html",
+          "date": "2026-11-22"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "TW:00687B",
+      "mkt": "TW",
+      "code": "00687B",
+      "name": "國泰20年美債（國泰20年期以上美國公債 ETF）",
+      "cls": "bond_l",
+      "ccy": "TWD",
+      "er_pct": 0.15,
+      "er_date": "2026-11-20",
+      "dist": "季配",
+      "min_fee_note": "手續費由券商訂定、上限千分之1.425；中信證券靚亮存（台股定期定股／小額零股）手續費優惠至2026-12-31：交易金額2萬元以下每筆1元（每筆先預收20元，多餘退回）；證券交易稅以券商為準",
+      "settle": "T+2",
+      "dca_ok": "待確認",
+      "note": "上櫃債券ETF；追蹤彭博20年期（以上）美國公債指數；台幣計價含美元匯率成分；存續期間長，價格對利率變動敏感；規模約1,071億台幣（2026-11-19）；費用率0.15%為MoneyDJ年報口徑總管理費用率（含非管理費用0.05%）；國泰官網頁面未能取得，費率級距取自winvest；靚亮存僅限盤中零股標的、官網未列個別清單，上櫃債券ETF能否定期投入待確認",
+      "src": [
+        {
+          "title": "MoneyDJ ETF 基本資料 00687B（總管理費用率、經理費、規模、配息頻率、追蹤指數）",
+          "url": "https://www.moneydj.com/etf/x/basic/basic0004.xdjhtm?etfid=00687b.tw",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "winvest ETF 基本資料 00687B（契約管理費與保管費級距、收益分配）",
+          "url": "https://winvest.tw/Stock/Symbol/EtfInformation/00687B",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "證券櫃檯買賣中心 OpenAPI 每日收盤行情（確認上櫃掛牌與成交）",
+          "url": "https://www.tpex.org.tw/openapi/v1/tpex_mainboard_daily_close_quotes",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "中國信託證券 靚亮存（台股定期定股／小額零股）說明與費用",
+          "url": "https://www.ctbcsec.com/2020/_event/dca_tw/index.html",
+          "date": "2026-11-22"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "TW:00865B",
+      "mkt": "TW",
+      "code": "00865B",
+      "name": "國泰US短期公債（國泰美國短期公債 ETF）",
+      "cls": "bond_s",
+      "ccy": "TWD",
+      "er_pct": 0.16,
+      "er_date": "2026-11-20",
+      "dist": "不配息（累積型）",
+      "min_fee_note": "手續費由券商訂定、上限千分之1.425；中信證券靚亮存（台股定期定股／小額零股）手續費優惠至2026-12-31：交易金額2萬元以下每筆1元（每筆先預收20元，多餘退回）；證券交易稅以券商為準",
+      "settle": "T+2",
+      "dca_ok": "待確認",
+      "note": "上市債券ETF；追蹤彭博美國短期公債收益指數；台幣計價含美元匯率成分，價格仍受利率變動影響；規模約173億台幣（2026-11-19）；費用率0.16%為MoneyDJ年報口徑總管理費用率（含非管理費用0.06%）；不配息僅winvest載明，Pocket顯示今年無除息紀錄，國泰官網頁面未能取得；靚亮存僅限盤中零股標的、官網未列個別清單，能否定期投入待確認",
+      "src": [
+        {
+          "title": "MoneyDJ ETF 基本資料 00865B（總管理費用率、經理費、規模、配息頻率、追蹤指數）",
+          "url": "https://www.moneydj.com/etf/x/basic/basic0004.xdjhtm?etfid=00865b.tw",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "winvest ETF 基本資料 00865B（契約管理費與保管費級距、收益分配）",
+          "url": "https://winvest.tw/Stock/Symbol/EtfInformation/00865B",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "Pocket ETF 專區 00865B（除息紀錄、規模）",
+          "url": "https://www.pocket.tw/main/etf-zone/00865B?market=tw",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "臺灣證券交易所 ETF 清單（上市日期、發行人、標的指數）",
+          "url": "https://www.twse.com.tw/rwd/zh/ETF/list?response=json",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "臺灣證券交易所 OpenAPI 每日收盤行情（確認掛牌與成交）",
+          "url": "https://openapi.twse.com.tw/v1/exchangeReport/STOCK_DAY_ALL",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "中國信託證券 靚亮存（台股定期定股／小額零股）說明與費用",
+          "url": "https://www.ctbcsec.com/2020/_event/dca_tw/index.html",
+          "date": "2026-11-22"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "US:VT",
+      "mkt": "US",
+      "code": "VT",
+      "name": "Vanguard 全世界股票 ETF（Total World Stock ETF）",
+      "cls": "gl_eq",
+      "ccy": "USD",
+      "er_pct": 0.06,
+      "er_date": "2026-02-27",
+      "dist": "季配",
+      "min_fee_note": "中信證券複委託：定期定額手續費外加0.2%（依成交價金、無最低手續費、單筆最低100美元、每月5/10/15/20/25日）；一般電子委託手續費率0.50%（手冊未列美股電子下單最低收費）；出售時依牌告並另收SEC/FINRA規費",
+      "settle": "T+1",
+      "dca_ok": "是",
+      "note": "追蹤FTSE Global All Cap指數，含美國與非美、已開發與新興市場；基金整體規模約1,017億美元（2026-10-31）；費用率為Vanguard公開的expense ratio；美元計價，台幣投資人有匯率風險",
+      "src": [
+        {
+          "title": "Vanguard VT 產品頁（費用率、規模、配息頻率、標的指數）",
+          "url": "https://investor.vanguard.com/investment-products/etfs/profile/vt",
+          "date": "2026-02-27"
+        },
+        {
+          "title": "Yahoo Finance VT 報價頁（Annual Report Expense Ratio、淨資產）",
+          "url": "https://finance.yahoo.com/quote/VT/",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 美股定期標的清單（PDF，定期定股／定額可委託標的）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/%E7%BE%8E%E8%82%A1%E5%AE%9A%E6%9C%9F%E6%B8%85%E5%96%AE.pdf",
+          "date": "2026-08-10"
+        },
+        {
+          "title": "中國信託證券 美股定期定股／定額 常見問題（手續費、最低門檻、扣款日）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/index.html",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 複委託交易手冊（手續費與交割日程總覽，編輯日期 2026-11-04）",
+          "url": "https://www.ctbcsec.com/2020/n3-subbrokerage/pdf/%E8%A4%87%E5%A7%94%E8%A8%97%E4%BA%A4%E6%98%93%E6%89%8B%E5%86%8A(%E4%B8%AD%E4%BF%A1%E8%AD%89%E7%89%88)_20261104.pdf",
+          "date": "2026-11-04"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "US:ACWI",
+      "mkt": "US",
+      "code": "ACWI",
+      "name": "iShares MSCI 全球（ACWI）ETF",
+      "cls": "gl_eq",
+      "ccy": "USD",
+      "er_pct": 0.32,
+      "er_date": "2026-11-20",
+      "dist": "半年配",
+      "min_fee_note": "中信證券複委託：一般電子委託手續費率0.50%（手冊未列美股電子下單最低收費；人工下單1.00%、最低USD 50）；未列於美股定期標的清單，無0.2%定期手續費；出售時另收SEC/FINRA規費",
+      "settle": "T+1",
+      "dca_ok": "否",
+      "note": "追蹤MSCI ACWI指數（已開發加新興市場）；規模兩來源不一致：iShares為約302億美元（2026-11-20）、Yahoo為約323億美元（2026-11-22），差異原因未查明，規模待確認；費用率0.32%兩來源一致；美元計價，台幣投資人有匯率風險",
+      "src": [
+        {
+          "title": "iShares MSCI ACWI ETF 產品頁（費用率、規模、配息頻率、標的指數）",
+          "url": "https://www.ishares.com/us/products/239600/ishares-msci-acwi-etf",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "Yahoo Finance ACWI 報價頁（Annual Report Expense Ratio、淨資產）",
+          "url": "https://finance.yahoo.com/quote/ACWI/",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 美股定期標的清單（PDF，定期定股／定額可委託標的）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/%E7%BE%8E%E8%82%A1%E5%AE%9A%E6%9C%9F%E6%B8%85%E5%96%AE.pdf",
+          "date": "2026-08-10"
+        },
+        {
+          "title": "中國信託證券 複委託交易手冊（手續費與交割日程總覽，編輯日期 2026-11-04）",
+          "url": "https://www.ctbcsec.com/2020/n3-subbrokerage/pdf/%E8%A4%87%E5%A7%94%E8%A8%97%E4%BA%A4%E6%98%93%E6%89%8B%E5%86%8A(%E4%B8%AD%E4%BF%A1%E8%AD%89%E7%89%88)_20261104.pdf",
+          "date": "2026-11-04"
+        }
+      ],
+      "status": "待確認"
+    },
+    {
+      "id": "US:VTI",
+      "mkt": "US",
+      "code": "VTI",
+      "name": "Vanguard 整體美股市場 ETF（官網名稱 Vanguard Morningstar Total Stock Market ETF）",
+      "cls": "us_eq",
+      "ccy": "USD",
+      "er_pct": 0.03,
+      "er_date": "2026-04-28",
+      "dist": "季配",
+      "min_fee_note": "中信證券複委託：定期定額手續費外加0.2%（依成交價金、無最低手續費、單筆最低100美元、每月5/10/15/20/25日）；一般電子委託手續費率0.50%（手冊未列美股電子下單最低收費）；出售時依牌告並另收SEC/FINRA規費",
+      "settle": "T+1",
+      "dca_ok": "是",
+      "note": "追蹤Morningstar US Total Market Index（涵蓋大中小型股）；基金整體規模約1.8兆美元（含其他份額，2026-10-31）；費用率為Vanguard公開的expense ratio；美元計價，台幣投資人有匯率風險",
+      "src": [
+        {
+          "title": "Vanguard VTI 產品頁（費用率、規模、配息頻率、標的指數）",
+          "url": "https://investor.vanguard.com/investment-products/etfs/profile/vti",
+          "date": "2026-04-28"
+        },
+        {
+          "title": "Yahoo Finance VTI 報價頁（Annual Report Expense Ratio、淨資產）",
+          "url": "https://finance.yahoo.com/quote/VTI/",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 美股定期標的清單（PDF，定期定股／定額可委託標的）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/%E7%BE%8E%E8%82%A1%E5%AE%9A%E6%9C%9F%E6%B8%85%E5%96%AE.pdf",
+          "date": "2026-08-10"
+        },
+        {
+          "title": "中國信託證券 美股定期定股／定額 常見問題（手續費、最低門檻、扣款日）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/index.html",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 複委託交易手冊（手續費與交割日程總覽，編輯日期 2026-11-04）",
+          "url": "https://www.ctbcsec.com/2020/n3-subbrokerage/pdf/%E8%A4%87%E5%A7%94%E8%A8%97%E4%BA%A4%E6%98%93%E6%89%8B%E5%86%8A(%E4%B8%AD%E4%BF%A1%E8%AD%89%E7%89%88)_20261104.pdf",
+          "date": "2026-11-04"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "US:VOO",
+      "mkt": "US",
+      "code": "VOO",
+      "name": "Vanguard 標普500 ETF（S&P 500 ETF）",
+      "cls": "us_eq",
+      "ccy": "USD",
+      "er_pct": 0.03,
+      "er_date": "2026-04-28",
+      "dist": "季配",
+      "min_fee_note": "中信證券複委託：定期定額手續費外加0.2%（依成交價金、無最低手續費、單筆最低100美元、每月5/10/15/20/25日）；一般電子委託手續費率0.50%（手冊未列美股電子下單最低收費）；出售時依牌告並另收SEC/FINRA規費",
+      "settle": "T+1",
+      "dca_ok": "是",
+      "note": "追蹤S&P 500指數；基金整體規模約1.7兆美元（含其他份額，2026-10-31）；費用率為Vanguard公開的expense ratio；美元計價，台幣投資人有匯率風險",
+      "src": [
+        {
+          "title": "Vanguard VOO 產品頁（費用率、規模、配息頻率、標的指數）",
+          "url": "https://investor.vanguard.com/investment-products/etfs/profile/voo",
+          "date": "2026-04-28"
+        },
+        {
+          "title": "Yahoo Finance VOO 報價頁（Annual Report Expense Ratio、淨資產）",
+          "url": "https://finance.yahoo.com/quote/VOO/",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 美股定期標的清單（PDF，定期定股／定額可委託標的）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/%E7%BE%8E%E8%82%A1%E5%AE%9A%E6%9C%9F%E6%B8%85%E5%96%AE.pdf",
+          "date": "2026-08-10"
+        },
+        {
+          "title": "中國信託證券 美股定期定股／定額 常見問題（手續費、最低門檻、扣款日）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/index.html",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 複委託交易手冊（手續費與交割日程總覽，編輯日期 2026-11-04）",
+          "url": "https://www.ctbcsec.com/2020/n3-subbrokerage/pdf/%E8%A4%87%E5%A7%94%E8%A8%97%E4%BA%A4%E6%98%93%E6%89%8B%E5%86%8A(%E4%B8%AD%E4%BF%A1%E8%AD%89%E7%89%88)_20261104.pdf",
+          "date": "2026-11-04"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "US:QQQM",
+      "mkt": "US",
+      "code": "QQQM",
+      "name": "Invesco 納斯達克100 ETF（NASDAQ 100 ETF）",
+      "cls": "us_tech",
+      "ccy": "USD",
+      "er_pct": 0.15,
+      "er_date": "2026-11-22",
+      "dist": "季配",
+      "min_fee_note": "中信證券複委託：定期定額手續費外加0.2%（依成交價金、無最低手續費、單筆最低100美元、每月5/10/15/20/25日）；一般電子委託手續費率0.50%（手冊未列美股電子下單最低收費）；出售時依牌告並另收SEC/FINRA規費",
+      "settle": "T+1",
+      "dca_ok": "是",
+      "note": "追蹤NASDAQ-100指數；規模約1,060億美元（Schwab與Yahoo，2026-11-22）；費用率0.15%取自Schwab與Yahoo兩個第三方來源，Invesco官網頁面未能取得；季配依Yahoo股利紀錄（2025-12、2026-03、2026-06、2026-09各一次）；美元計價，台幣投資人有匯率風險",
+      "src": [
+        {
+          "title": "Charles Schwab ETF 研究頁 QQQM（Gross/Net Expense Ratio、總資產、標的指數）",
+          "url": "https://www.schwab.wallst.com/Prospect/Research/etfs/summary.asp?symbol=qqqm",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "Yahoo Finance QQQM 報價頁（Annual Report Expense Ratio、淨資產）",
+          "url": "https://finance.yahoo.com/quote/QQQM/",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "Yahoo Finance QQQM 股利歷史（配息頻率）",
+          "url": "https://finance.yahoo.com/quote/QQQM/history/?filter=div",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 美股定期標的清單（PDF，定期定股／定額可委託標的）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/%E7%BE%8E%E8%82%A1%E5%AE%9A%E6%9C%9F%E6%B8%85%E5%96%AE.pdf",
+          "date": "2026-08-10"
+        },
+        {
+          "title": "中國信託證券 美股定期定股／定額 常見問題（手續費、最低門檻、扣款日）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/index.html",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 複委託交易手冊（手續費與交割日程總覽，編輯日期 2026-11-04）",
+          "url": "https://www.ctbcsec.com/2020/n3-subbrokerage/pdf/%E8%A4%87%E5%A7%94%E8%A8%97%E4%BA%A4%E6%98%93%E6%89%8B%E5%86%8A(%E4%B8%AD%E4%BF%A1%E8%AD%89%E7%89%88)_20261104.pdf",
+          "date": "2026-11-04"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "US:SGOV",
+      "mkt": "US",
+      "code": "SGOV",
+      "name": "iShares 0-3個月美國公債 ETF（0-3 Month Treasury Bond ETF）",
+      "cls": "bond_s",
+      "ccy": "USD",
+      "er_pct": 0.09,
+      "er_date": "2026-11-20",
+      "dist": "月配",
+      "min_fee_note": "中信證券複委託：一般電子委託手續費率0.50%（手冊未列美股電子下單最低收費；人工下單1.00%、最低USD 50）；未列於美股定期標的清單，無0.2%定期手續費；出售時另收SEC/FINRA規費",
+      "settle": "T+1",
+      "dca_ok": "否",
+      "note": "追蹤ICE 0-3個月美國公債指數；規模約1,195億美元（2026-11-20）；債券ETF，價格仍受利率變動影響，配息會隨利率變動；美元計價，台幣投資人有匯率風險",
+      "src": [
+        {
+          "title": "iShares 0-3 Month Treasury Bond ETF 產品頁（費用率、規模、配息頻率、標的指數）",
+          "url": "https://www.ishares.com/us/products/314116/ishares-0-3-month-treasury-bond-etf",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "Yahoo Finance SGOV 報價頁（Annual Report Expense Ratio、淨資產）",
+          "url": "https://finance.yahoo.com/quote/SGOV/",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 美股定期標的清單（PDF，定期定股／定額可委託標的）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/%E7%BE%8E%E8%82%A1%E5%AE%9A%E6%9C%9F%E6%B8%85%E5%96%AE.pdf",
+          "date": "2026-08-10"
+        },
+        {
+          "title": "中國信託證券 複委託交易手冊（手續費與交割日程總覽，編輯日期 2026-11-04）",
+          "url": "https://www.ctbcsec.com/2020/n3-subbrokerage/pdf/%E8%A4%87%E5%A7%94%E8%A8%97%E4%BA%A4%E6%98%93%E6%89%8B%E5%86%8A(%E4%B8%AD%E4%BF%A1%E8%AD%89%E7%89%88)_20261104.pdf",
+          "date": "2026-11-04"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "US:BND",
+      "mkt": "US",
+      "code": "BND",
+      "name": "Vanguard 整體債券市場 ETF（Total Bond Market ETF）",
+      "cls": "bond_l",
+      "ccy": "USD",
+      "er_pct": 0.03,
+      "er_date": "2026-04-28",
+      "dist": "月配",
+      "min_fee_note": "中信證券複委託：定期定額手續費外加0.2%（依成交價金、無最低手續費、單筆最低100美元、每月5/10/15/20/25日）；一般電子委託手續費率0.50%（手冊未列美股電子下單最低收費）；出售時依牌告並另收SEC/FINRA規費",
+      "settle": "T+1",
+      "dca_ok": "是",
+      "note": "追蹤彭博美國綜合債券（浮動調整）指數，涵蓋投資等級公債、公司債、MBS與ABS（Vanguard官網）；基金整體規模約4,006億美元（2026-10-31）；債券ETF，價格受利率變動影響；美元計價，台幣投資人有匯率風險",
+      "src": [
+        {
+          "title": "Vanguard BND 產品頁（費用率、規模、配息頻率、標的指數）",
+          "url": "https://investor.vanguard.com/investment-products/etfs/profile/bnd",
+          "date": "2026-04-28"
+        },
+        {
+          "title": "Yahoo Finance BND 報價頁（Annual Report Expense Ratio、淨資產）",
+          "url": "https://finance.yahoo.com/quote/BND/",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 美股定期標的清單（PDF，定期定股／定額可委託標的）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/%E7%BE%8E%E8%82%A1%E5%AE%9A%E6%9C%9F%E6%B8%85%E5%96%AE.pdf",
+          "date": "2026-08-10"
+        },
+        {
+          "title": "中國信託證券 美股定期定股／定額 常見問題（手續費、最低門檻、扣款日）",
+          "url": "https://www.ctbcsec.com/2020/_event/stock_USA/index.html",
+          "date": "2026-11-22"
+        },
+        {
+          "title": "中國信託證券 複委託交易手冊（手續費與交割日程總覽，編輯日期 2026-11-04）",
+          "url": "https://www.ctbcsec.com/2020/n3-subbrokerage/pdf/%E8%A4%87%E5%A7%94%E8%A8%97%E4%BA%A4%E6%98%93%E6%89%8B%E5%86%8A(%E4%B8%AD%E4%BF%A1%E8%AD%89%E7%89%88)_20261104.pdf",
+          "date": "2026-11-04"
+        }
+      ],
+      "status": "ok"
+    }
+  ]
+}

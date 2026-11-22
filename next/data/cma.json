@@ -1,0 +1,473 @@
+{
+  "rev": 2,
+  "as_of": "2026-11-22",
+  "note": "假設不是預測。各類別 mu 為機構預測的年化複利（幾何）報酬；模型內部換算成漂移後才計入波動拖累。",
+  "mu_kind": "geometric",
+  "classes": [
+    {
+      "id": "cash",
+      "label": "現金／定存",
+      "mu": 0.017,
+      "sigma": 0.006,
+      "cap": 1,
+      "proxy": {
+        "name": "新台幣活存／1 年期定存",
+        "code": "TWD-DEPOSIT"
+      },
+      "basis": "設計護欄 cap=1。mu：臺灣銀行 1 年期定存 1.700%、中華郵政 1.725%（Money101 二手整理，2026-10）、央行重貼現率 2%（2026-09-17）；活存利率遠低於此，故 mu 屬定存口徑，實際活存部位報酬較低。sigma：台幣存款名目本金無市場波動，取公開現金類資產波動（JPM 美元現金 0.67%、Capital Group 美元現金 0.6%）下限 0.6% 以滿足 sigma>0。台幣原生，無匯率成分。",
+      "src": [
+        {
+          "title": "中央銀行 2026 年第 3 季理監事會決議新聞稿（重貼現率 2%；2026 年 CPI 預測 2.03%）",
+          "url": "https://www.cbc.gov.tw/tw/cp-302-192864-4319f-1.html",
+          "date": "2026-09-17"
+        },
+        {
+          "title": "Money101 — 台幣定存／定儲利率比較（臺灣銀行 1 年期定存 1.700%、中華郵政 1.725%；二手整理）",
+          "url": "https://www.money101.com.tw/blog/台幣-定存-定儲-利率",
+          "date": "2026-10-18"
+        },
+        {
+          "title": "J.P. Morgan AM — 2026 LTCMA 報酬／波動／相關矩陣（USD；資料截至 2025-09-30）",
+          "url": "https://am.jpmorgan.com/content/dam/jpm-am-aem/global/en/insights/ltcma-2026-us-matrix_usd.pdf",
+          "date": "2025-10"
+        },
+        {
+          "title": "Capital Group — Capital market assumptions（20 年，USD；2025-12-31）",
+          "url": "https://www.capitalgroup.com/institutional/insights/capital-market-assumptions.html",
+          "date": "2025-12-31"
+        }
+      ],
+      "status": "待確認"
+    },
+    {
+      "id": "bond_s",
+      "label": "短期美債（台幣計價，含匯率成分）",
+      "mu": 0.046,
+      "sigma": 0.05,
+      "cap": 1,
+      "proxy": {
+        "name": "iShares 1-3 Year Treasury Bond ETF（追蹤 ICE U.S. Treasury 1-3 Year）；台灣對應 00865B",
+        "code": "SHY"
+      },
+      "basis": "設計護欄 cap=1。mu（美元）：SHY 30 日 SEC 殖利率 4.57%／到期殖利率 4.75%（2026-11-19），與 JPM 2027 LTCMA 美國中期公債 4.6% 一致，取 4.6%（短債報酬≈起始殖利率，非機構對 1–3 年期的專屬預測）；+0% 匯率漂移。sigma（美元）：SHY 3 年標準差 1.63%（與 JPM 短存續期 1.63% 一致）→ 與匯率波動合成約 5.0%；僅有 3 年而非 10 年。台幣口徑：美元資產以「美元預期報酬 + 0% 匯率漂移」換算（不預測台幣升貶；匯率假設改 ±1 個百分點，所有美元計價類別 mu 同步改 ∓1 個百分點）；波動為美元波動與 USD/TWD 年化波動 4.7%（V-Lab 約 4.9%、Commerzbank 約 4.5% 的平均）按 sqrt(σ_usd²+σ_fx²) 合成，假設匯率與資產報酬相關為 0。",
+      "src": [
+        {
+          "title": "iShares 1-3 Year Treasury Bond ETF (SHY)：到期殖利率 4.75%、30 日 SEC 殖利率 4.57%（2026-11-19）、3 年標準差 1.63%（2026-10-31）",
+          "url": "https://www.ishares.com/us/products/239452/ishares-13-year-treasury-bond-etf",
+          "date": "2026-11-19"
+        },
+        {
+          "title": "J.P. Morgan AM — 2027 Long-Term Capital Market Assumptions（新聞稿：美國大型股 7.5%、全球股票 7.5%、新興市場 7.1%、美國中期公債 4.6%、投資級信用 6.1%；10–15 年，USD）",
+          "url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-releases-2027-long-term-capital-market-assumptions/",
+          "date": "2026-10-19"
+        },
+        {
+          "title": "J.P. Morgan AM — 2026 LTCMA 報酬／波動／相關矩陣（USD；資料截至 2025-09-30）",
+          "url": "https://am.jpmorgan.com/content/dam/jpm-am-aem/global/en/insights/ltcma-2026-us-matrix_usd.pdf",
+          "date": "2025-10"
+        },
+        {
+          "title": "NYU Stern V-Lab — USD/TWD GJR-GARCH 波動分析（目前年化約 3.55%；參數期間 1990-05-30～2026-11-20）",
+          "url": "https://vlab.stern.nyu.edu/volatility/VOL.USDTWD:FOREX-R.GJR-GARCH",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "FXStreet／Commerzbank — Taiwan Dollar: Growth and AI flows anchor TWD（USD/TWD 一個月已實現波動約 4.5%）",
+          "url": "https://www.fxstreet.com/news/taiwan-dollar-growth-and-ai-flows-anchor-twd-commerzbank-202606021756",
+          "date": "2026-06-02"
+        }
+      ],
+      "status": "待確認"
+    },
+    {
+      "id": "bond_l",
+      "label": "中長期債（投資等級／美國綜合債）",
+      "mu": 0.05,
+      "sigma": 0.073,
+      "cap": 0.6,
+      "proxy": {
+        "name": "iShares Core U.S. Aggregate Bond ETF（追蹤 Bloomberg US Aggregate）",
+        "code": "AGG"
+      },
+      "basis": "設計護欄 cap=0.6。mu（美元）：美國綜合債預測 Vanguard 5.6%（5.1–6.1% 區間中點）、Schwab 4.8%、Invesco 5.2%（幾何）、Capital Group 4.5%（20 年），簡單平均 5.03% 取 5.0%；對照 AGG 到期殖利率 5.38%、JPM 2027 中期公債 4.6%／投資級信用 6.1%（JPM 未單列美國綜合債）；過去 10 年 AGG 年化僅約 1.1%（利率上升期，不外推）。sigma（美元）：AGG 3 年標準差 5.58%（Invesco 預期風險 5.0%、JPM 4.76%）→ 與匯率合成約 7.3%；僅有 3 年。台幣口徑：美元資產以「美元預期報酬 + 0% 匯率漂移」換算（不預測台幣升貶；匯率假設改 ±1 個百分點，所有美元計價類別 mu 同步改 ∓1 個百分點）；波動為美元波動與 USD/TWD 年化波動 4.7%（V-Lab 約 4.9%、Commerzbank 約 4.5% 的平均）按 sqrt(σ_usd²+σ_fx²) 合成，假設匯率與資產報酬相關為 0。",
+      "src": [
+        {
+          "title": "Vanguard — Setting realistic expectations（VCMM 10 年年化預測區間，2026-09-30 模型）",
+          "url": "https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html",
+          "date": "2026-10-21"
+        },
+        {
+          "title": "Schwab's 2026 Long-Term Capital Market Expectations（10 年，USD）",
+          "url": "https://www.schwab.com/learn/story/schwabs-long-term-capital-market-expectations",
+          "date": "2026-01-02"
+        },
+        {
+          "title": "Invesco — 2026 Capital Market Assumptions, Q3 Update（10 年，USD；估計截至 2026-06-30）",
+          "url": "https://www.invesco.com/content/dam/invesco/emea/en/pdf/invesco-capital-market-assumption-usd.pdf",
+          "date": "2026-06-30"
+        },
+        {
+          "title": "Capital Group — Capital market assumptions（20 年，USD；2025-12-31）",
+          "url": "https://www.capitalgroup.com/institutional/insights/capital-market-assumptions.html",
+          "date": "2025-12-31"
+        },
+        {
+          "title": "iShares Core U.S. Aggregate Bond ETF (AGG)：到期殖利率 5.38%（2026-11-19）、3 年標準差 5.58%（2026-10-31）",
+          "url": "https://www.ishares.com/us/products/239458/ishares-core-total-us-bond-market-etf",
+          "date": "2026-11-19"
+        },
+        {
+          "title": "J.P. Morgan AM — 2027 Long-Term Capital Market Assumptions（新聞稿：美國大型股 7.5%、全球股票 7.5%、新興市場 7.1%、美國中期公債 4.6%、投資級信用 6.1%；10–15 年，USD）",
+          "url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-releases-2027-long-term-capital-market-assumptions/",
+          "date": "2026-10-19"
+        },
+        {
+          "title": "NYU Stern V-Lab — USD/TWD GJR-GARCH 波動分析（目前年化約 3.55%；參數期間 1990-05-30～2026-11-20）",
+          "url": "https://vlab.stern.nyu.edu/volatility/VOL.USDTWD:FOREX-R.GJR-GARCH",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "FXStreet／Commerzbank — Taiwan Dollar: Growth and AI flows anchor TWD（USD/TWD 一個月已實現波動約 4.5%）",
+          "url": "https://www.fxstreet.com/news/taiwan-dollar-growth-and-ai-flows-anchor-twd-commerzbank-202606021756",
+          "date": "2026-06-02"
+        }
+      ],
+      "status": "待確認"
+    },
+    {
+      "id": "tw_eq",
+      "label": "台股大盤",
+      "mu": 0.064,
+      "sigma": 0.24,
+      "cap": 0.6,
+      "proxy": {
+        "name": "元大台灣50（追蹤臺灣50指數）／加權報酬指數",
+        "code": "0050"
+      },
+      "basis": "設計護欄 cap=0.6。mu：未查到機構公開的台灣專屬長期假設，以新興市場股票代理：JPM 2027 7.1%、Vanguard 4.7%（3.7–5.7% 中點）、Schwab 6.8%、Invesco 7.1%、Capital Group 6.5%（20 年），平均 6.44% 取 6.4%（美元、名目），台幣本地報酬不另加匯率項；不採歷史實績（MSCI Taiwan 2000 年起年化 11.8%、近 10 年 21.9%，含 AI 行情與估值擴張，不外推）。sigma：MSCI Taiwan（USD）10 年 23.97%、臺灣50 報酬指數（台幣）5 年 23.78%，取 24%；近 3 年 27%、近 1 年約 34% 較高，未採用。",
+      "src": [
+        {
+          "title": "J.P. Morgan AM — 2027 Long-Term Capital Market Assumptions（新聞稿：美國大型股 7.5%、全球股票 7.5%、新興市場 7.1%、美國中期公債 4.6%、投資級信用 6.1%；10–15 年，USD）",
+          "url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-releases-2027-long-term-capital-market-assumptions/",
+          "date": "2026-10-19"
+        },
+        {
+          "title": "Vanguard — Setting realistic expectations（VCMM 10 年年化預測區間，2026-09-30 模型）",
+          "url": "https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html",
+          "date": "2026-10-21"
+        },
+        {
+          "title": "Schwab's 2026 Long-Term Capital Market Expectations（10 年，USD）",
+          "url": "https://www.schwab.com/learn/story/schwabs-long-term-capital-market-expectations",
+          "date": "2026-01-02"
+        },
+        {
+          "title": "Invesco — 2026 Capital Market Assumptions, Q3 Update（10 年，USD；估計截至 2026-06-30）",
+          "url": "https://www.invesco.com/content/dam/invesco/emea/en/pdf/invesco-capital-market-assumption-usd.pdf",
+          "date": "2026-06-30"
+        },
+        {
+          "title": "Capital Group — Capital market assumptions（20 年，USD；2025-12-31）",
+          "url": "https://www.capitalgroup.com/institutional/insights/capital-market-assumptions.html",
+          "date": "2025-12-31"
+        },
+        {
+          "title": "MSCI Taiwan Index（USD）月報：淨報酬與年化標準差（10Y 23.97%；2000 年起年化 11.82%）",
+          "url": "https://www.msci.com/documents/10199/255599/msci-taiwan-index-net.pdf",
+          "date": "2026-10-30"
+        },
+        {
+          "title": "臺灣指數公司 — 臺灣50指數報酬指數 TW50C（年化標準差 5Y 23.78%、3Y 27.18%；頁面未標資料日、未標幣別）",
+          "url": "https://taiwanindex.com.tw/en/indexes/TW50C",
+          "date": "2026-11-22"
+        }
+      ],
+      "status": "待確認"
+    },
+    {
+      "id": "us_eq",
+      "label": "美股大盤",
+      "mu": 0.057,
+      "sigma": 0.163,
+      "cap": 0.7,
+      "proxy": {
+        "name": "S&P 500（波動統計以 MSCI USA 代理）；ETF 例：SPY／VOO／00646",
+        "code": "SPX"
+      },
+      "basis": "設計護欄 cap=0.7。mu（美元、10 年或以上）：JPM 2027 7.5%、Vanguard 5.8%（4.8–6.8% 中點）、Schwab 5.9%、Invesco 5.5%（幾何）、Capital Group 6.1%（20 年）、Research Affiliates 3.1%（二手引述），六者平均 5.65% 取 5.7%；近 10 年實績（MSCI USA 年化 14.9%）遠高於各機構前瞻值，不外推。sigma（美元）：MSCI USA 近 10 年年化標準差 15.57%（S&P DJI：S&P 500 2015–2024 平均年化 16.2%；JPM／Invesco 前瞻值 16.5–17.0%，較歷史高約 1 個百分點）→ 與匯率合成約 16.3%。台幣口徑：美元資產以「美元預期報酬 + 0% 匯率漂移」換算（不預測台幣升貶；匯率假設改 ±1 個百分點，所有美元計價類別 mu 同步改 ∓1 個百分點）；波動為美元波動與 USD/TWD 年化波動 4.7%（V-Lab 約 4.9%、Commerzbank 約 4.5% 的平均）按 sqrt(σ_usd²+σ_fx²) 合成，假設匯率與資產報酬相關為 0。",
+      "src": [
+        {
+          "title": "J.P. Morgan AM — 2027 Long-Term Capital Market Assumptions（新聞稿：美國大型股 7.5%、全球股票 7.5%、新興市場 7.1%、美國中期公債 4.6%、投資級信用 6.1%；10–15 年，USD）",
+          "url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-releases-2027-long-term-capital-market-assumptions/",
+          "date": "2026-10-19"
+        },
+        {
+          "title": "Vanguard — Setting realistic expectations（VCMM 10 年年化預測區間，2026-09-30 模型）",
+          "url": "https://corporate.vanguard.com/content/corporatesite/us/en/corp/vemo/vemo-return-forecasts.html",
+          "date": "2026-10-21"
+        },
+        {
+          "title": "Schwab's 2026 Long-Term Capital Market Expectations（10 年，USD）",
+          "url": "https://www.schwab.com/learn/story/schwabs-long-term-capital-market-expectations",
+          "date": "2026-01-02"
+        },
+        {
+          "title": "Invesco — 2026 Capital Market Assumptions, Q3 Update（10 年，USD；估計截至 2026-06-30）",
+          "url": "https://www.invesco.com/content/dam/invesco/emea/en/pdf/invesco-capital-market-assumption-usd.pdf",
+          "date": "2026-06-30"
+        },
+        {
+          "title": "Capital Group — Capital market assumptions（20 年，USD；2025-12-31）",
+          "url": "https://www.capitalgroup.com/institutional/insights/capital-market-assumptions.html",
+          "date": "2025-12-31"
+        },
+        {
+          "title": "Fortune — Research Affiliates（Arnott）預估 S&P 500 未來 10 年年化 3.1%（二手引述，是否名目待確認）",
+          "url": "https://fortune.com/2026/03/17/spx-stock-market-future-returns-outlook-warning/",
+          "date": "2026-03-17"
+        },
+        {
+          "title": "MSCI USA Index（USD）月報：淨報酬與年化標準差（MSCI USA 10Y 15.57%、MSCI ACWI 10Y 14.73%）",
+          "url": "https://www.msci.com/documents/10199/255599/msci-usa-index-net.pdf",
+          "date": "2026-10-30"
+        },
+        {
+          "title": "S&P DJI — Volatility, Correlation and Dispersion in the S&P 500 Top 20 Select Index（S&P 500 2015–2024 平均年化波動 16.2%）",
+          "url": "https://www.spglobal.com/spdji/en/blog/article/volatility-correlation-and-dispersion-in-the-sp-500-top-20-select-index/",
+          "date": "2025-04-25"
+        },
+        {
+          "title": "NYU Stern V-Lab — USD/TWD GJR-GARCH 波動分析（目前年化約 3.55%；參數期間 1990-05-30～2026-11-20）",
+          "url": "https://vlab.stern.nyu.edu/volatility/VOL.USDTWD:FOREX-R.GJR-GARCH",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "FXStreet／Commerzbank — Taiwan Dollar: Growth and AI flows anchor TWD（USD/TWD 一個月已實現波動約 4.5%）",
+          "url": "https://www.fxstreet.com/news/taiwan-dollar-growth-and-ai-flows-anchor-twd-commerzbank-202606021756",
+          "date": "2026-06-02"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "gl_eq",
+      "label": "全球（含非美）股票",
+      "mu": 0.061,
+      "sigma": 0.155,
+      "cap": 0.7,
+      "proxy": {
+        "name": "MSCI ACWI；ETF 例：VT／ACWI",
+        "code": "ACWI"
+      },
+      "basis": "設計護欄 cap=0.7。mu（美元）：同時給出全球與美國的機構取「全球−美國」價差再加到 us_eq 平均，避免來源混用：JPM 2027 價差 0.0（7.5 vs 7.5）、Invesco +0.9（6.4 vs 5.5），平均 +0.45，5.65+0.45=6.1%（Vanguard、Schwab 未給全球整體值，不使用）。sigma（美元）：MSCI ACWI 近 10 年年化標準差 14.73%（JPM 前瞻 16.8%、Invesco 16.5%）→ 與匯率合成約 15.5%。台幣口徑：美元資產以「美元預期報酬 + 0% 匯率漂移」換算（不預測台幣升貶；匯率假設改 ±1 個百分點，所有美元計價類別 mu 同步改 ∓1 個百分點）；波動為美元波動與 USD/TWD 年化波動 4.7%（V-Lab 約 4.9%、Commerzbank 約 4.5% 的平均）按 sqrt(σ_usd²+σ_fx²) 合成，假設匯率與資產報酬相關為 0。",
+      "src": [
+        {
+          "title": "J.P. Morgan AM — 2027 Long-Term Capital Market Assumptions（新聞稿：美國大型股 7.5%、全球股票 7.5%、新興市場 7.1%、美國中期公債 4.6%、投資級信用 6.1%；10–15 年，USD）",
+          "url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-releases-2027-long-term-capital-market-assumptions/",
+          "date": "2026-10-19"
+        },
+        {
+          "title": "J.P. Morgan AM — 2027 LTCMA Executive Summary（資料截至 2026-09-30，USD）",
+          "url": "https://am.jpmorgan.com/sg/en/asset-management/institutional/insights/portfolio-insights/ltcma/executive-summary/",
+          "date": "2026-10-19"
+        },
+        {
+          "title": "Invesco — 2026 Capital Market Assumptions, Q3 Update（10 年，USD；估計截至 2026-06-30）",
+          "url": "https://www.invesco.com/content/dam/invesco/emea/en/pdf/invesco-capital-market-assumption-usd.pdf",
+          "date": "2026-06-30"
+        },
+        {
+          "title": "MSCI USA Index（USD）月報：淨報酬與年化標準差（MSCI USA 10Y 15.57%、MSCI ACWI 10Y 14.73%）",
+          "url": "https://www.msci.com/documents/10199/255599/msci-usa-index-net.pdf",
+          "date": "2026-10-30"
+        },
+        {
+          "title": "J.P. Morgan AM — 2026 LTCMA 報酬／波動／相關矩陣（USD；資料截至 2025-09-30）",
+          "url": "https://am.jpmorgan.com/content/dam/jpm-am-aem/global/en/insights/ltcma-2026-us-matrix_usd.pdf",
+          "date": "2025-10"
+        },
+        {
+          "title": "NYU Stern V-Lab — USD/TWD GJR-GARCH 波動分析（目前年化約 3.55%；參數期間 1990-05-30～2026-11-20）",
+          "url": "https://vlab.stern.nyu.edu/volatility/VOL.USDTWD:FOREX-R.GJR-GARCH",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "FXStreet／Commerzbank — Taiwan Dollar: Growth and AI flows anchor TWD（USD/TWD 一個月已實現波動約 4.5%）",
+          "url": "https://www.fxstreet.com/news/taiwan-dollar-growth-and-ai-flows-anchor-twd-commerzbank-202606021756",
+          "date": "2026-06-02"
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "id": "us_tech",
+      "label": "美股科技",
+      "mu": 0.057,
+      "sigma": 0.19,
+      "cap": 0.3,
+      "proxy": {
+        "name": "NASDAQ-100；ETF 例：QQQ／00662",
+        "code": "NDX"
+      },
+      "basis": "設計護欄 cap=0.3。mu：未查到機構對 NASDAQ-100 的公開專屬長期假設，與 us_eq 同值 5.7%（不加成長溢酬；歷史上 NDX 18 年年化 16.0% vs S&P 11.0% 屬已實現值，不外推）。sigma：Nasdaq 官方資料 2007–2026 年化波動 NDX 22.8% vs SPX 19.8%（比值 1.15；2007–2025 為 22.9% vs 20.1%，比值 1.14）；換算到 MSCI USA 近 10 年基準 15.57%×1.15≈17.9%，另以「+3.0 個百分點」算得 18.6%，取 18.3%（美元，推算值，非直接公布的 10 年數字）→ 與匯率合成約 18.9%。台幣口徑：美元資產以「美元預期報酬 + 0% 匯率漂移」換算（不預測台幣升貶；匯率假設改 ±1 個百分點，所有美元計價類別 mu 同步改 ∓1 個百分點）；波動為美元波動與 USD/TWD 年化波動 4.7%（V-Lab 約 4.9%、Commerzbank 約 4.5% 的平均）按 sqrt(σ_usd²+σ_fx²) 合成，假設匯率與資產報酬相關為 0。",
+      "src": [
+        {
+          "title": "Nasdaq — NDX vs. SPX 2-pager（2007-12-31～2026-09-30 年化波動 NDX 22.8%／SPX 19.8%；日報酬相關 93%）",
+          "url": "https://indexes.nasdaqomx.com/docs/NDX%20vs.%20SPX%20-%202%20pager.pdf",
+          "date": "2026-09-30"
+        },
+        {
+          "title": "Nasdaq — When Performance Matters: Nasdaq-100 vs. S&P 500, Q4 2025（2007–2025 年化波動 NDX 22.9%／SPX 20.1%）",
+          "url": "https://www.nasdaq.com/articles/when-performance-matters-nasdaq-100-vs-s-and-p-500-q4-2025",
+          "date": "2025-12-31"
+        },
+        {
+          "title": "MSCI USA Index（USD）月報：淨報酬與年化標準差（MSCI USA 10Y 15.57%、MSCI ACWI 10Y 14.73%）",
+          "url": "https://www.msci.com/documents/10199/255599/msci-usa-index-net.pdf",
+          "date": "2026-10-30"
+        },
+        {
+          "title": "J.P. Morgan AM — 2027 Long-Term Capital Market Assumptions（新聞稿：美國大型股 7.5%、全球股票 7.5%、新興市場 7.1%、美國中期公債 4.6%、投資級信用 6.1%；10–15 年，USD）",
+          "url": "https://am.jpmorgan.com/us/en/asset-management/institutional/about-us/media/press-releases/jp-morgan-releases-2027-long-term-capital-market-assumptions/",
+          "date": "2026-10-19"
+        },
+        {
+          "title": "Invesco — 2026 Capital Market Assumptions, Q3 Update（10 年，USD；估計截至 2026-06-30）",
+          "url": "https://www.invesco.com/content/dam/invesco/emea/en/pdf/invesco-capital-market-assumption-usd.pdf",
+          "date": "2026-06-30"
+        },
+        {
+          "title": "NYU Stern V-Lab — USD/TWD GJR-GARCH 波動分析（目前年化約 3.55%；參數期間 1990-05-30～2026-11-20）",
+          "url": "https://vlab.stern.nyu.edu/volatility/VOL.USDTWD:FOREX-R.GJR-GARCH",
+          "date": "2026-11-20"
+        },
+        {
+          "title": "FXStreet／Commerzbank — Taiwan Dollar: Growth and AI flows anchor TWD（USD/TWD 一個月已實現波動約 4.5%）",
+          "url": "https://www.fxstreet.com/news/taiwan-dollar-growth-and-ai-flows-anchor-twd-commerzbank-202606021756",
+          "date": "2026-06-02"
+        }
+      ],
+      "status": "待確認"
+    }
+  ],
+  "corr": [
+    [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0,
+      0.81,
+      0.04,
+      0.28,
+      0.31,
+      0.24
+    ],
+    [
+      0.0,
+      0.81,
+      1.0,
+      0.16,
+      0.3,
+      0.34,
+      0.27
+    ],
+    [
+      0.0,
+      0.04,
+      0.16,
+      1.0,
+      0.69,
+      0.81,
+      0.65
+    ],
+    [
+      0.0,
+      0.28,
+      0.3,
+      0.69,
+      1.0,
+      0.97,
+      0.93
+    ],
+    [
+      0.0,
+      0.31,
+      0.34,
+      0.81,
+      0.97,
+      1.0,
+      0.91
+    ],
+    [
+      0.0,
+      0.24,
+      0.27,
+      0.65,
+      0.93,
+      0.91,
+      1.0
+    ]
+  ],
+  "corr_basis": "台幣口徑 7×7 相關矩陣。步驟：(1) 以公開機構的假設／歷史相關為基底（美元計價）：JPM 2026 LTCMA 相關矩陣（美國短存續期債、綜合債、美國大型股、新興市場、ACWI；2025-09-30 資料，前瞻假設）與 Invesco 2026 Q3 CMA 的 10 年相關（Treasury、綜合債、美國大型股、全球、新興市場；歷史），兩者可比時取平均（例：綜合債–美國大型股 JPM 0.30、Invesco 0.02 → 0.16）；短債沿用 JPM 短存續期列並與 Invesco 美國公債列平均；台股無公開專屬相關，以新興市場列代理（與美國大型股 0.73／0.72→0.725、與全球 0.86／0.83→0.845），可能低估台股與美股科技的連動；美股科技–美股大盤取 Nasdaq 日報酬相關 0.93（CME 2026-06 約 0.95），科技與其他類別以「經由 us_eq 相乘」推算（例：科技–全球 0.97×0.93）；(2) 台幣換算：美元計價的 5 類（bond_s、bond_l、us_eq、gl_eq、us_tech）共同加入一個與資產獨立的 USD/TWD 波動因子（4.7%），共變異數加 σ_fx² 後再轉回相關（故美元債與美股的台幣相關約 0.3，高於美元相關）；台股為台幣本地資產，不加匯率因子，與美元資產共變異數不含匯率項；(3) cash 與其他類別設 0（台幣存款無市場風險因子；JPM 美元現金與其他資產相關 0.01–0.32 不適用台幣存款）。相關為假設：危機時股債與股股相關會上升，模型為固定相關。已驗證對稱、對角 1、Cholesky 可分解。",
+  "corr_src": [
+    {
+      "title": "J.P. Morgan AM — 2026 LTCMA 報酬／波動／相關矩陣（USD；資料截至 2025-09-30）",
+      "url": "https://am.jpmorgan.com/content/dam/jpm-am-aem/global/en/insights/ltcma-2026-us-matrix_usd.pdf",
+      "date": "2025-10"
+    },
+    {
+      "title": "Invesco — 2026 Capital Market Assumptions, Q3 Update（10 年，USD；估計截至 2026-06-30）",
+      "url": "https://www.invesco.com/content/dam/invesco/emea/en/pdf/invesco-capital-market-assumption-usd.pdf",
+      "date": "2026-06-30"
+    },
+    {
+      "title": "Nasdaq — NDX vs. SPX 2-pager（2007-12-31～2026-09-30 年化波動 NDX 22.8%／SPX 19.8%；日報酬相關 93%）",
+      "url": "https://indexes.nasdaqomx.com/docs/NDX%20vs.%20SPX%20-%202%20pager.pdf",
+      "date": "2026-09-30"
+    },
+    {
+      "title": "CME Group — Why US equity benchmarks are moving together and drifting apart（SPX–NDX 日報酬相關約 0.9–0.95）",
+      "url": "https://www.cmegroup.com/insights/economic-research/2026/why-us-equity-benchmarks-are-moving-together-and-drifting-apart.html",
+      "date": "2026-06"
+    },
+    {
+      "title": "NYU Stern V-Lab — USD/TWD GJR-GARCH 波動分析（目前年化約 3.55%；參數期間 1990-05-30～2026-11-20）",
+      "url": "https://vlab.stern.nyu.edu/volatility/VOL.USDTWD:FOREX-R.GJR-GARCH",
+      "date": "2026-11-20"
+    },
+    {
+      "title": "FXStreet／Commerzbank — Taiwan Dollar: Growth and AI flows anchor TWD（USD/TWD 一個月已實現波動約 4.5%）",
+      "url": "https://www.fxstreet.com/news/taiwan-dollar-growth-and-ai-flows-anchor-twd-commerzbank-202606021756",
+      "date": "2026-06-02"
+    }
+  ],
+  "idio": {
+    "tw_single": 0.32,
+    "us_single": 0.3,
+    "basis": "【待確認】個股相對所屬大盤類別的個別年化波動（β 視為 1，個別變異＝個股總變異−大盤變異）。美股：S&P DJI 於 2024-11-04 公布單一股票隱含波動指數 VIXEQ 36.77（86 檔大型股、市值加權均方根）對比 VIX 21.98，sqrt(36.77²−21.98²)=29.5%，取 0.30；僅單一時點、單一來源、為隱含而非實現波動，且當日為選舉日偏高。台股：未查到公開的台股個股波動統計；以美股 VIXEQ/VIX 比值 1.673 類推到台股大盤波動 24%：24%×sqrt(1.673²−1)=32.2%，取 0.32，屬類推而非台股實測。持股中的 個股中波動較大者個別波動可能高於此類別值。",
+    "src": [
+      {
+        "title": "S&P DJI Indexology — A VIX for single stocks is alive and ticking（VIXEQ 36.77 vs VIX 21.98，2024-11-04）",
+        "url": "https://www.spglobal.com/spdji/en/blog/article/a-vix-for-single-stocks-is-alive-and-ticking/",
+        "date": "2024-11-05"
+      },
+      {
+        "title": "MSCI USA Index（USD）月報：淨報酬與年化標準差（MSCI USA 10Y 15.57%、MSCI ACWI 10Y 14.73%）",
+        "url": "https://www.msci.com/documents/10199/255599/msci-usa-index-net.pdf",
+        "date": "2026-10-30"
+      },
+      {
+        "title": "MSCI Taiwan Index（USD）月報：淨報酬與年化標準差（10Y 23.97%；2000 年起年化 11.82%）",
+        "url": "https://www.msci.com/documents/10199/255599/msci-taiwan-index-net.pdf",
+        "date": "2026-10-30"
+      }
+    ]
+  }
+}
